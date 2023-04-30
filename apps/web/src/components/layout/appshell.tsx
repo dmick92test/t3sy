@@ -1,7 +1,7 @@
 import { SignInButton, SignOutButton, useAuth, useUser } from "@clerk/nextjs"
-import { AppShell, Avatar, Burger, Button, Group, Header, MediaQuery, Menu, Navbar, Text, UnstyledButton, useMantineTheme } from "@mantine/core"
+import { AppShell, Avatar, Burger, Button, Group, Header, MediaQuery, Menu, Navbar, Text, ThemeIcon, UnstyledButton, useMantineTheme } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks";
-import { IconChevronDown, IconHeart, IconLogout, IconMessage, IconSettings, IconStar, IconSwitchHorizontal } from "@tabler/icons-react"
+import { IconBriefcase, IconChevronDown, IconHeart, IconLogout, IconMessage, IconSettings, IconStar, IconSwitchHorizontal } from "@tabler/icons-react"
 import { type PropsWithChildren, useState } from "react";
 
 import Link from "next/link";
@@ -24,9 +24,34 @@ export const AppShellLayout = (props: PropsWithChildren) => {
             asideOffsetBreakpoint="sm"
             navbar={
                 <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-                    <Text>This will be a list of chats you&apos;re in</Text>
                     {/* Grow section will take all available space that is not taken by first and last sections */}
-                    <Navbar.Section grow>Grow section</Navbar.Section>
+                    <Navbar.Section grow>
+                        <UnstyledButton
+                            sx={(theme) => ({
+                                display: 'block',
+                                width: '100%',
+                                padding: theme.spacing.xs,
+                                borderRadius: theme.radius.sm,
+                                color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+
+                                '&:hover': {
+                                    backgroundColor:
+                                        theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+                                },
+                            })}
+                            component={Link}
+                            href="/jobs"
+                        >
+                            <Group>
+                                <ThemeIcon color='blue' variant="light">
+                                    <IconBriefcase size="1rem" />
+                                </ThemeIcon>
+
+                                <Text size="sm">Jobs</Text>
+                            </Group>
+                        </UnstyledButton>
+                    </Navbar.Section>
+
 
                     {/* Last section with normal height (depends on section content) */}
 
@@ -111,6 +136,15 @@ export const AppShellLayout = (props: PropsWithChildren) => {
                                 </MediaQuery>
                             </>
                         }
+                        <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+                            <Burger
+                                opened={opened}
+                                onClick={toggle}
+                                size="sm"
+                                color={theme.colors.gray[6]}
+                                mr="xl"
+                            />
+                        </MediaQuery>
 
                         {!isSignedIn && <Button component={SignInButton}>Sign In</Button>}
                     </div>
