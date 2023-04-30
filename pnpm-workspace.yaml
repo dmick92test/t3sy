@@ -1,5 +1,6 @@
 packages:
   - apps/web
+  - apps/jobboard
   - apps/admin
   - packages/api
   - packages/auth
