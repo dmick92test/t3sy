@@ -1,13 +1,11 @@
 import type { AppType } from "next/app";
 import type { Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { api } from "~/utils/api";
 
 import { MantineProvider, ColorSchemeProvider, type ColorScheme } from '@mantine/core';
-import { useColorScheme, useHotkeys, useLocalStorage } from '@mantine/hooks';
-import { useState } from "react";
+import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import Head from "next/head";
 
 import { AppShellLayout } from "~/components/layout/appshell";
@@ -15,9 +13,8 @@ import { ModalsProvider } from "@mantine/modals";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { ...pageProps },
 }) => {
-  const preferredColorScheme = useColorScheme();
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
     defaultValue: 'light',

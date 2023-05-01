@@ -1,11 +1,11 @@
-import { ActionIcon, Box, Button, Checkbox, Grid, Group, Loader, NumberInput, Stack, Text, TextInput, Textarea } from "@mantine/core";
+import { ActionIcon, Box, Button, Checkbox, Grid, Group, NumberInput, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import { IconEdit, IconSearch, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { type RouterOutputs, api } from "~/utils/api";
+import { type RouterOutputs, api, type RouterInputs } from "~/utils/api";
 import { useForm, zodResolver } from '@mantine/form';
 import { z } from "zod";
 import { closeAllModals, openModal } from "@mantine/modals";
@@ -73,10 +73,11 @@ const JobForm = (props: OptionalJob) => {
       form.setValues(parsedJob);
       form.resetDirty(parsedJob);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
-  const submitFunc = (values: any) => {
+  type createValues = RouterInputs["job"]["create"]
+  const submitFunc = (values: createValues | createValues) => {
     if (typeof job !== "undefined") {
       updateJob({ id: job.id, name: values.name, rate: values.rate, hours: values.hours, description: values.description });
     }

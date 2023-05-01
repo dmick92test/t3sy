@@ -1,17 +1,15 @@
-import { SignInButton, SignOutButton, useAuth, useUser } from "@clerk/nextjs"
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs"
 import { AppShell, Avatar, Burger, Button, Group, Header, MediaQuery, Menu, Navbar, Text, ThemeIcon, UnstyledButton, useMantineTheme } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks";
 import { IconBriefcase, IconChevronDown, IconHeart, IconLogout, IconMessage, IconSettings, IconStar, IconSwitchHorizontal } from "@tabler/icons-react"
-import { type PropsWithChildren, useState } from "react";
+import { type PropsWithChildren, } from "react";
 
 import Link from "next/link";
 
 export const AppShellLayout = (props: PropsWithChildren) => {
     const theme = useMantineTheme();
     const [opened, { toggle }] = useDisclosure(false);
-    const [userMenuOpened, setUserMenuOpened] = useState(false);
-    const { user, isSignedIn, isLoaded: isUserLoaded } = useUser();
-    const { signOut } = useAuth();
+    const { user, isSignedIn } = useUser();
 
     return (
         <AppShell
@@ -79,8 +77,6 @@ export const AppShellLayout = (props: PropsWithChildren) => {
                                         width={260}
                                         position="bottom-end"
                                         transitionProps={{ transition: 'pop-top-right' }}
-                                        onClose={() => setUserMenuOpened(false)}
-                                        onOpen={() => setUserMenuOpened(true)}
                                         withinPortal
                                     >
                                         <Menu.Target>
@@ -95,6 +91,7 @@ export const AppShellLayout = (props: PropsWithChildren) => {
                                             </UnstyledButton>
                                         </Menu.Target>
                                         <Menu.Dropdown>
+                                            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                                             <Menu.Item component={Link} href={user.username!}>Profile</Menu.Item>
                                             <Menu.Item
                                                 icon={<IconHeart size="0.9rem" color={theme.colors.red[6]} stroke={1.5} />}
