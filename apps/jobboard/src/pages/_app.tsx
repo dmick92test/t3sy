@@ -1,5 +1,4 @@
 import type { AppType } from "next/app";
-import type { Session } from "next-auth";
 
 import { api } from "~/utils/api";
 
@@ -7,9 +6,10 @@ import { MantineProvider } from '@mantine/core';
 import Head from "next/head";
 
 
-const MyApp: AppType<{ session: Session | null }> = ({
+const MyApp: AppType = ({
   Component,
-  pageProps: { session, ...pageProps },
+  // pageProps: { session, ...pageProps },
+  pageProps: { ...pageProps },
 }) => {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
