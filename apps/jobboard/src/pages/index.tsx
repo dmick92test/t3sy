@@ -1,20 +1,16 @@
-import { ActionIcon, Box, Button, Checkbox, Container, Grid, Group, Loader, NumberInput, Stack, Text, TextInput, Textarea } from "@mantine/core";
+import { Box, Checkbox, Container, Grid, Group, Stack, Text, TextInput } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
-import { IconEdit, IconSearch, IconTrash } from "@tabler/icons-react";
+import { IconSearch } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { type RouterOutputs, api } from "~/utils/api";
-import { useForm, zodResolver } from '@mantine/form';
-import { z } from "zod";
-import { closeAllModals, openModal } from "@mantine/modals";
 
 type Job = RouterOutputs["job"]["all"][number];
 
 const JobPage: NextPage = () => {
 
-  const ctx = api.useContext();
   const { data, isLoading } = api.job.all.useQuery();
 
   const [records, setRecords] = useState(data);
