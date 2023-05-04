@@ -91,7 +91,6 @@ export const AppShellLayout = (props: PropsWithChildren) => {
                                             </UnstyledButton>
                                         </Menu.Target>
                                         <Menu.Dropdown>
-                                            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                                             <Menu.Item component={Link} href={user.username!}>Profile</Menu.Item>
                                             <Menu.Item
                                                 icon={<IconHeart size="0.9rem" color={theme.colors.red[6]} stroke={1.5} />}
